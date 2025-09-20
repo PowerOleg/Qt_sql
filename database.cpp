@@ -33,11 +33,23 @@ void DataBase::AddDataBase(QString driver, QString nameDB)
  */
 void DataBase::ConnectToDataBase(QVector<QString> data)
 {
-    dataBase->setHostName(data[hostName]);
-    dataBase->setDatabaseName(data[dbName]);
-    dataBase->setUserName(data[login]);
-    dataBase->setPassword(data[pass]);
-    dataBase->setPort(data[port].toInt());
+    if (data[hostName] != "")
+    {
+        dataBase->setHostName(data[hostName]);
+        dataBase->setDatabaseName(data[dbName]);
+        dataBase->setUserName(data[login]);
+        dataBase->setPassword(data[pass]);
+        dataBase->setPort(data[port].toInt());
+    }
+    else
+    {
+        //mock to get data for connection
+        dataBase->setHostName("981757-ca08998.tmweb.ru");
+        dataBase->setDatabaseName("netology_cpp");
+        dataBase->setUserName("netology_usr_cpp");
+        dataBase->setPassword("CppNeto3");
+        dataBase->setPort(5432);
+    }
 
     bool status;
     status = dataBase->open();
